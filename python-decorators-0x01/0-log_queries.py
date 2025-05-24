@@ -6,11 +6,13 @@ from datetime import datetime
 
 """ YOUR CODE GOES HERE """
 def log_queries(func):
+    functools.wraps(func)
     def wrapper_log_queries(*args, **kwargs):
         print("Log query before executing: ")
         print(f' Args: {args}' )
         print(f' Kwargs: {kwargs}' )
         print(f'Making db query {kwargs["query"]} at {datetime.now()}')
+        print(f'{func.__name__}() is making a db query using {kwargs["query"]} at {datetime.now()}')
     return wrapper_log_queries
 
 @log_queries
